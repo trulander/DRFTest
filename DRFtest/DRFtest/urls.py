@@ -20,17 +20,27 @@ from django.urls import path
 from rest_framework import routers
 from django.conf.urls import url, include
 from django.urls import path
-from quickstart import views
 
+from rest_framework.schemas import get_schema_view
+
+import quickstart.views as quickstart_view
+import snippets.views as snippets_view
 
 router = routers.DefaultRouter()
 
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'quickstart_users', quickstart_view.UserViewSet)
+router.register(r'quickstart_groups', quickstart_view.GroupViewSet)
+
+router.register(r'snippets', snippets_view.SnippetViewSet)
+router.register(r'users', snippets_view.UserViewSet)
+
+schema_view = get_schema_view(title='Pastebin API')
 
 urlpatterns = [
-    url(r'^', include('snippets.urls')),
-    path('api-auth/', include('rest_framework.urls')),
+    url(r'^', include(router.urls)),
+    #url(r'^', include('snippets.urls')),
+    path('schema/', schema_view),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 # urlpatterns = [
