@@ -1,0 +1,10 @@
+/token.json
+/DRFtest/bd/
+/venv/
+__pycache__/
+.idea
+credentials.json
+token.json
+db.sqlite3
+bluecoins.fydb
+.env

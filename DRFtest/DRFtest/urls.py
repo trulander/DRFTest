@@ -39,8 +39,11 @@ schema_view = get_schema_view(title='Pastebin API')
 urlpatterns = [
     url(r'^', include(router.urls)),
     #url(r'^', include('snippets.urls')),
+    path('telegramapi/', include('telegrambot.urls')),
+    path('celery/', include('celeryapp.urls')),
     path('schema/', schema_view),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('admin/', admin.site.urls),
 ]
 
 # urlpatterns = [
